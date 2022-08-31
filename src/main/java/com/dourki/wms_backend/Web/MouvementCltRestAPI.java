@@ -162,7 +162,7 @@ public class MouvementCltRestAPI {
         List<List<String>> list = new ArrayList<>();
 
         for (LigneCmdClt ligneCmdClt:ligneCmdCltPage) {
-            if(ligneCmdClt.getPalette().getEmplacement() == null){
+            if(ligneCmdClt.getPalette().getEmplacement() != null){
                 List<String> ligneCmdCltInfo = new ArrayList<>();
                 ligneCmdCltInfo.add(Integer.toString(ligneCmdClt.getID()));
                 ligneCmdCltInfo.add(ligneCmdClt.getPalette().getNom());

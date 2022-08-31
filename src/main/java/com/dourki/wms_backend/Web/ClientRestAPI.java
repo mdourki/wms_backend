@@ -4,6 +4,7 @@ import com.dourki.wms_backend.Services.CategorieClientService;
 import com.dourki.wms_backend.Services.ClientService;
 import com.dourki.wms_backend.entities.CategorieClient;
 import com.dourki.wms_backend.entities.Client;
+import com.dourki.wms_backend.entities.Fournisseur;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +94,21 @@ public class ClientRestAPI {
     @GetMapping("/clients/getByID/{ID}")
     public Client getClientByID(@PathVariable int ID) {
         return clientService.getClientByID(ID);
+    }
+
+    @GetMapping("/clients/getID/{clientName}")
+    public int getClientIDByNom(@PathVariable String clientName) {
+        return clientService.getClientByNom(clientName).getID();
+    }
+
+    @GetMapping("/clients/getAllClientsNames")
+    public List<String> getAllClientsNames() {
+        List<String> listNames = new ArrayList<>();
+        List<Client> clients = clientService.getListClients();
+        for (Client client : clients){
+            listNames.add(client.getNom());
+        }
+        return listNames;
     }
 
 }

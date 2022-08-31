@@ -10,6 +10,7 @@ public interface ClientService {
     Page<Client> getClients(int page, int size);
     List<Client> getListClients();
     Client getClientByID(int id);
+    Client getClientByNom(String nom);
     Client getClientByNomAndAdresseAndNumTelAndEmail(String nom,String adresse, String numTel, String email);
     void deleteClientByID(int id);
 }

@@ -23,8 +23,8 @@ public class LigneFactClt {
 
     public List<String> getInfo() {
         int paletteQte = palette.getQuantity();
-        float prdtPrixUnit = palette.getProduit().getPrixUnit();
-        float totalPrix = paletteQte * prdtPrixUnit;
+        float prdtPrixTTC = palette.getProduit().getPrixTTC();
+        float totalPrix = paletteQte * prdtPrixTTC;
 
         List<String> list = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class LigneFactClt {
         list.add(palette.getProduit().getCouleur().getCodeClr());
         list.add(palette.getProduit().getTaille().getCodeTaille());
         list.add(Integer.toString(paletteQte));
-        list.add(Float.toString(prdtPrixUnit));
+        list.add(Float.toString(prdtPrixTTC));
         list.add(Float.toString(totalPrix));
         list.add(enteteFactClt.getClient().getAdresse());
         list.add(enteteFactClt.getClient().getNumTel());

@@ -38,6 +38,11 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
+    public Client getClientByNom(String nom) {
+        return clientRepository.findClientByNom(nom);
+    }
+
+    @Override
     public Client getClientByNomAndAdresseAndNumTelAndEmail(String nom, String adresse, String numTel, String email) {
         return clientRepository.findClientByNomAndAdresseAndNumTelAndEmail(nom, adresse, numTel, email);
     }

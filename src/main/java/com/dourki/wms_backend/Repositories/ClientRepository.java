@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ClientRepository extends JpaRepository<Client, Integer> {
     Client findClientByNomAndAdresseAndNumTelAndEmail(String nom,String adresse, String numTel, String email);
     Client findClientByID(int id);
+    Client findClientByNom(String nom);
     void deleteClientByID(int id);
 }
