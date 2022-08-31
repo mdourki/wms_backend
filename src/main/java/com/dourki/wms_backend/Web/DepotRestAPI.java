@@ -5,6 +5,7 @@ import com.dourki.wms_backend.Services.EmplacementService;
 import com.dourki.wms_backend.entities.Client;
 import com.dourki.wms_backend.entities.Depot;
 import com.dourki.wms_backend.entities.Emplacement;
+import com.dourki.wms_backend.entities.Produit;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -100,6 +101,15 @@ public class DepotRestAPI {
         List<String> listLibelles = new ArrayList<>();
         depots.forEach(depot -> {listLibelles.add(depot.getLibelle());});
         return listLibelles;
+    }
+
+    @GetMapping("/depots/stockGlobal/{page}/{size}")
+    public List<List<String>> getPageDepotsStockGlobal(@PathVariable int page, @PathVariable int size){
+        Page<Depot> depotPage = depotService.getDepots(page,size);
+        List<List<String>> list = new ArrayList<>();
+
+        depotPage.forEach(depot -> {list.add(depot.getQuantityInfo());});
+        return list;
     }
 
 }

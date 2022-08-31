@@ -111,4 +111,12 @@ public class ClientRestAPI {
         return listNames;
     }
 
+    @GetMapping("/clientsPrdts/{page}/{size}")
+    public List<List<String>> getCltsPrdts(@PathVariable int page , @PathVariable int size){
+        Page<Client> clientPage = clientService.getClients(page , size);
+        List<List<String>> list = new ArrayList<>();
+        clientPage.forEach(client ->  {list.add(client.getInfoCltPrdts());});
+        return list;
+    }
+
 }

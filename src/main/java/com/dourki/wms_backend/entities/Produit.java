@@ -56,6 +56,19 @@ public class Produit {
         return list;
     }
 
+    public List<String> getQuantityInfo() {
+        List<String> list = new ArrayList<>();
+        int qte = 0;
+        for (Palette palette:palettes) {
+            if(palette.getEmplacement() != null) {
+                qte+=palette.getQuantity();
+            }
+        }
+        list.add(codePrdt);
+        list.add(Integer.toString(qte));
+        return list;
+    }
+
     public String toString(){
         return "Nom : " + nom
                 + "\nDesignation : " + designation

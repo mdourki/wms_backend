@@ -37,4 +37,21 @@ public class Famille {
         list.add(prdts);
         return list;
     }
+
+    public List<String> getQuantityInfo() {
+        List<String> list = new ArrayList<>();
+        int qte = 0;
+
+        for (Produit produit:produits) {
+            for (Palette palette:produit.getPalettes()) {
+                if(palette.getEmplacement() != null) {
+                    qte+=palette.getQuantity();
+                }
+            }
+        }
+
+        list.add(nom);
+        list.add(Integer.toString(qte));
+        return list;
+    }
 }

@@ -3,6 +3,7 @@ package com.dourki.wms_backend.Web;
 import com.dourki.wms_backend.Services.FamilleService;
 import com.dourki.wms_backend.Services.ProduitService;
 import com.dourki.wms_backend.entities.Collection;
+import com.dourki.wms_backend.entities.Depot;
 import com.dourki.wms_backend.entities.Famille;
 import com.dourki.wms_backend.entities.Produit;
 import lombok.AllArgsConstructor;
@@ -103,6 +104,15 @@ public class FamilleRestAPI {
         Page<Famille> famillePage = familleService.getFamilles(page , size);
         List<List<String>> list = new ArrayList<>();
         famillePage.forEach(famille ->  {list.add(famille.infoFamillePrdts());});
+        return list;
+    }
+
+    @GetMapping("/familles/stockGlobal/{page}/{size}")
+    public List<List<String>> getPageFamillesStockGlobal(@PathVariable int page, @PathVariable int size){
+        Page<Famille> famillePage = familleService.getFamilles(page,size);
+        List<List<String>> list = new ArrayList<>();
+
+        famillePage.forEach(famille -> {list.add(famille.getQuantityInfo());});
         return list;
     }
 }

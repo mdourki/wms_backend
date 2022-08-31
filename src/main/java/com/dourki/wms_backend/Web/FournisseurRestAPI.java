@@ -3,6 +3,7 @@ package com.dourki.wms_backend.Web;
 import com.dourki.wms_backend.Services.CategorieFournisseurService;
 import com.dourki.wms_backend.Services.FournisseurService;
 import com.dourki.wms_backend.entities.CategorieFournisseur;
+import com.dourki.wms_backend.entities.Famille;
 import com.dourki.wms_backend.entities.Fournisseur;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -108,6 +109,23 @@ public class FournisseurRestAPI {
             listNames.add(fournisseur.getNom());
         }
         return listNames;
+    }
+
+    @GetMapping("/fournisseursPrdts/{page}/{size}")
+    public List<List<String>> getFournisseursPrdts(@PathVariable int page , @PathVariable int size){
+        Page<Fournisseur> fournisseurPage = fournisseurService.getFournisseurs(page , size);
+        List<List<String>> list = new ArrayList<>();
+        fournisseurPage.forEach(fournisseur ->  {list.add(fournisseur.getInfoFourPrdts());});
+        return list;
+    }
+
+    @GetMapping("/fournisseurs/stockGlobal/{page}/{size}")
+    public List<List<String>> getPageFournisseursStockGlobal(@PathVariable int page, @PathVariable int size){
+        Page<Fournisseur> fournisseurPage = fournisseurService.getFournisseurs(page,size);
+        List<List<String>> list = new ArrayList<>();
+
+        fournisseurPage.forEach(fournisseur -> {list.add(fournisseur.getQuantityInfo());});
+        return list;
     }
 
 }

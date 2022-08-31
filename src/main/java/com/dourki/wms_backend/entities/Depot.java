@@ -26,4 +26,18 @@ public class Depot {
         list.add(adresse);
         return list;
     }
+
+    public List<String> getQuantityInfo() {
+        List<String> list = new ArrayList<>();
+        int qte = 0;
+        for (Emplacement emplacement:emplacements) {
+            if(emplacement.getPalette() != null) {
+                Palette palette = emplacement.getPalette();
+                qte+=palette.getQuantity();
+            }
+        }
+        list.add(libelle);
+        list.add(Integer.toString(qte));
+        return list;
+    }
 }

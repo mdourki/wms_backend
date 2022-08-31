@@ -23,12 +23,6 @@ public class ProduitRestAPI {
     private StyleService styleService;
     private TvaService tvaService;
 
-    @GetMapping("/produits/{produitCodeBarre}")
-    public String getProdtCodeBarre(@PathVariable String produitCodeBarre) throws ProduitNotFoundException {
-        Produit produit = produitService.getPrdt(produitCodeBarre);
-        return produit.toString();
-    }
-
     @PostMapping("/produits/save/{nom}/{couleurs}/{tailles}/{nomFamille}/{nomCollection}/{nomStyle}/{tvaTaux}" +
             "/{codeBarre}/{designation}/{prixUnit}/{prixTTC}")
     public String postProduit(@PathVariable String nom , @PathVariable String couleurs ,
@@ -120,6 +114,15 @@ public class ProduitRestAPI {
         else {
             list.add("Aucun produit");
         }
+        return list;
+    }
+
+    @GetMapping("/produits/stockGlobal/{page}/{size}")
+    public List<List<String>> getPageProduitsStockGlobal(@PathVariable int page, @PathVariable int size){
+        Page<Produit> produitPage = produitService.getProduits(page,size);
+        List<List<String>> list = new ArrayList<>();
+
+        produitPage.forEach(produit -> {list.add(produit.getQuantityInfo());});
         return list;
     }
 }
